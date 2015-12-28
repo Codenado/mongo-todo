@@ -18,8 +18,7 @@ var Todo = mongoose.model('Todo', {
     text : String
 })
 
-app.listen(8080)
-console.log('App listnening on port 8080')
+
 
 
 app.get('/api/todos', function(req, res){
@@ -63,3 +62,11 @@ app.delete('/api/todos/:tod_id', function(req, res){
         })
     })
 })
+
+
+app.get('*' function(res, req){
+    res.sendfile('./public/index.html')
+})
+
+app.listen(8080)
+console.log('App listnening on port 8080')
