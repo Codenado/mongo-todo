@@ -14,5 +14,52 @@ app.use(bodyParser.json())
 app.use(bodyParser.json({type: 'application/vnd.api+json'}))
 app.use(methodOverride())
 
+var Todo = mongoose.model('Todo', {
+    text : String
+})
+
 app.listen(8080)
 console.log('App listnening on port 8080')
+
+
+app.get('/api/todos', function(req, res){
+    Todo.find(function(e, todos){
+        if (e){
+            res.send(e)
+        }
+        res.json(todos)
+    })
+})
+
+app.post('/api/todos', function(req, res){
+    Todo.create({
+        text : req.body.text,
+        done: false
+    }, function(e, todo){
+        if(e){
+            res.send(e)
+        }
+        Todo.find(function(e, todos){
+            if (e){
+                res.send(e)
+            }
+            res.json(todos)
+        })
+    })
+})
+
+app.delete('/api/todos/:tod_id', function(req, res){
+    Todo.remove({
+        req.params.todo_id
+    }, function(e, todo){
+        if(e){
+            res.send(e)
+        }
+        Todo.find(function(e, todos){
+            if (e){
+                res.send(e)
+            }
+            res.json(todos)
+        })
+    })
+})
