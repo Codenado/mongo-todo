@@ -13,10 +13,11 @@ function mainController($scope, $http){
     })
     
     $scope.createTodo = function(){
-        $http/post('/api/todos', $scope.formData)
+        $http.post('/api/todos', $scope.formData)
             .success(function(data){
+            console.log( $scope.formData)
             $scope.formData = {}
-            $scope.tods = data
+            $scope.todos = data
             console.log(data)
         })
         .error(function(data){
@@ -27,8 +28,9 @@ function mainController($scope, $http){
     $scope.deleteTodo = function(id){
         $http.delete('/api/todos/' + id)
             .success(function(data){
-                $scope.tods = data
-                console.log(data)
+                $scope.todos = data
+                console.log('gone')
+           
         })
         .error(function(data){
             console.log('Error: ' + data)

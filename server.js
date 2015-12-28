@@ -47,9 +47,9 @@ app.post('/api/todos', function(req, res){
     })
 })
 
-app.delete('/api/todos/:tod_id', function(req, res){
+app.delete('/api/todos/:todo_id', function(req, res){
     Todo.remove({
-        req.params.todo_id
+        _id: req.params.todo_id
     }, function(e, todo){
         if(e){
             res.send(e)
@@ -64,7 +64,9 @@ app.delete('/api/todos/:tod_id', function(req, res){
 })
 
 
-app.get('*' function(res, req){
+
+
+app.get('*', function(res, req){
     res.sendfile('./public/index.html')
 })
 
